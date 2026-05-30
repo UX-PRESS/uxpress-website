@@ -1,0 +1,73 @@
+import Link from "next/link";
+import { site } from "@/lib/site";
+
+const links = [
+  { href: "/templates", label: "Templates" },
+  { href: "/installation-service", label: "Installation" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" }
+];
+
+const socialLinks = [
+  { href: "https://x.com/uxpress", label: "X" },
+  { href: "https://www.linkedin.com/company/uxpress", label: "LinkedIn" },
+  { href: "https://www.instagram.com/uxpress", label: "Instagram" }
+];
+
+export function Footer() {
+  return (
+    <footer className="border-t border-border bg-foreground text-background">
+      <div className="container-shell grid gap-10 py-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+        <div>
+          <Link href="/" className="text-xl font-semibold">
+            Uxpress
+          </Link>
+          <p className="mt-4 max-w-md text-sm leading-7 text-[#d8d0c4]">
+            Premium website kits for coaches, consultants, mentors, and service professionals who want to launch faster.
+          </p>
+        </div>
+        <div>
+          <p className="mb-4 text-sm font-semibold text-gold">Explore</p>
+          <div className="grid gap-3">
+            {links.map((link) => (
+              <Link key={link.href} href={link.href} className="text-sm text-[#d8d0c4] hover:text-background">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p className="mb-4 text-sm font-semibold text-gold">Social</p>
+          <div className="grid gap-3">
+            {socialLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-[#d8d0c4] hover:text-background"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p className="mb-4 text-sm font-semibold text-gold">Support</p>
+          <a className="text-sm text-[#d8d0c4] hover:text-background" href={`mailto:${site.supportEmail}`}>
+            {site.supportEmail}
+          </a>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm">
+            <Link href="/terms" className="text-[#d8d0c4] hover:text-background">
+              Terms
+            </Link>
+            <Link href="/privacy" className="text-[#d8d0c4] hover:text-background">
+              Privacy Policy
+            </Link>
+          </div>
+          <p className="mt-6 text-xs text-[#a99f90]">© {new Date().getFullYear()} Uxpress. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
