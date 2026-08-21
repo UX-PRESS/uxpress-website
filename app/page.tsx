@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+"use client";
+
 import { ButtonLink } from "@/components/ButtonLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { useLanguage } from "@/components/LanguageProvider";
 import {
   audiences,
   benefits,
@@ -11,17 +13,9 @@ import {
   steps,
   testimonials
 } from "@/lib/homepage";
+import { localize, t } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Launch Your Professional Website in Days, Not Months",
-  description:
-    "Premium website templates and complete website kits built specifically for coaches, consultants, and service professionals.",
-  alternates: {
-    canonical: "/"
-  }
-};
-
-function HeroMockups() {
+function HeroMockups({ locale }: { locale: "en" | "pt" }) {
   return (
     <div className="relative min-h-[460px] overflow-hidden rounded-[28px] border border-border bg-sand p-4 shadow-[0_30px_80px_rgba(36,33,28,0.12)] mockup-grid">
       <div className="absolute left-5 top-6 w-[82%] rounded-2xl border border-border bg-background shadow-xl md:left-10 md:top-10">
@@ -53,7 +47,7 @@ function HeroMockups() {
       </div>
 
       <div className="absolute bottom-8 right-5 w-[58%] rounded-2xl border border-border bg-foreground p-4 text-background shadow-2xl md:right-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Template kit</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">{t("Template kit", locale)}</p>
         <div className="mt-4 h-4 w-32 rounded-full bg-background/90" />
         <div className="mt-3 h-3 w-44 max-w-full rounded-full bg-background/25" />
         <div className="mt-5 grid grid-cols-2 gap-3">
@@ -72,42 +66,51 @@ function HeroMockups() {
 }
 
 export default function HomePage() {
+  const { locale } = useLanguage();
+  const localizedStats = localize(stats, locale);
+  const localizedBenefits = localize(benefits, locale);
+  const localizedSteps = localize(steps, locale);
+  const localizedTemplates = localize(landingTemplates, locale);
+  const localizedComparison = localize(comparison, locale);
+  const localizedAudiences = localize(audiences, locale);
+  const localizedTestimonials = localize(testimonials, locale);
+  const localizedFaqs = localize(landingFaqs, locale);
+
   return (
     <>
       <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#fff7e7_0%,#f3e9d8_34%,#fffcf7_78%)] py-16 md:py-24">
         <div className="container-shell grid items-center gap-12 lg:grid-cols-[1fr_0.95fr]">
           <div className="reveal">
             <p className="mb-5 inline-flex rounded-full border border-border bg-background/70 px-4 py-2 text-sm font-semibold text-charcoal shadow-sm">
-              Premium website kits for service professionals
+              {t("Premium website kits for service professionals", locale)}
             </p>
             <h1 className="text-balance text-5xl font-semibold leading-none tracking-tight md:text-7xl">
-              Launch Your Professional Website in Days, Not Months.
+              {t("Launch Your Professional Website in Days, Not Months.", locale)}
             </h1>
             <p className="mt-6 max-w-2xl text-pretty text-lg leading-8 text-charcoal md:text-xl">
-              Premium website templates and complete website kits built specifically for coaches, consultants, and
-              service professionals.
+              {t("Premium website templates and complete website kits built specifically for coaches, consultants, and service professionals.", locale)}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/templates">Browse Templates</ButtonLink>
+              <ButtonLink href="/templates">{t("Browse Templates", locale)}</ButtonLink>
               <ButtonLink href="#how-it-works" variant="secondary">
-                See How It Works
+                {t("See How It Works", locale)}
               </ButtonLink>
             </div>
             <div className="mt-8 grid gap-3 text-sm font-medium text-taupe sm:grid-cols-3">
-              <span>Conversion-ready sections</span>
-              <span>Mobile-first layouts</span>
-              <span>Launch support available</span>
+              <span>{t("Conversion-ready sections", locale)}</span>
+              <span>{t("Mobile-first layouts", locale)}</span>
+              <span>{t("Launch support available", locale)}</span>
             </div>
           </div>
           <div className="reveal reveal-delay-1">
-            <HeroMockups />
+            <HeroMockups locale={locale} />
           </div>
         </div>
       </section>
 
       <section aria-label="Uxpress social proof" className="border-y border-border bg-background py-8">
         <div className="container-shell grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
+          {localizedStats.map((stat) => (
             <div key={stat.label} className="rounded-2xl border border-border bg-sand p-5 text-center">
               <p className="text-3xl font-semibold tracking-tight">{stat.value}</p>
               <p className="mt-1 text-sm font-medium text-taupe">{stat.label}</p>
@@ -119,13 +122,13 @@ export default function HomePage() {
       <section className="bg-background py-16 md:py-24">
         <div className="container-shell">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">Benefits</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">{t("Benefits", locale)}</p>
             <h2 className="mt-4 text-balance text-4xl font-semibold md:text-6xl">
-              Everything You Need to Launch Faster
+              {t("Everything You Need to Launch Faster", locale)}
             </h2>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {benefits.map((benefit) => (
+            {localizedBenefits.map((benefit) => (
               <article key={benefit.title} className="group rounded-2xl border border-border bg-sand p-6 hover:-translate-y-1 hover:bg-background hover:shadow-xl hover:shadow-charcoal/5">
                 <div className="grid h-12 w-12 place-items-center rounded-full bg-foreground text-sm font-semibold text-background">
                   {benefit.icon}
@@ -141,14 +144,14 @@ export default function HomePage() {
       <section id="how-it-works" className="bg-sand py-16 md:py-24">
         <div className="container-shell">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">How it works</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">{t("How it works", locale)}</p>
             <h2 className="mt-4 text-balance text-4xl font-semibold md:text-6xl">
-              From template to launched site in three focused steps.
+              {t("From template to launched site in three focused steps.", locale)}
             </h2>
           </div>
           <div className="relative mt-12 grid gap-5 lg:grid-cols-3">
             <div className="absolute left-[16%] right-[16%] top-10 hidden h-px bg-border lg:block" />
-            {steps.map((step) => (
+            {localizedSteps.map((step) => (
               <article key={step.title} className="relative rounded-2xl border border-border bg-background p-7 shadow-sm">
                 <div className="grid h-16 w-16 place-items-center rounded-full border border-border bg-foreground text-2xl font-semibold text-background">
                   {step.number}
@@ -165,17 +168,17 @@ export default function HomePage() {
         <div className="container-shell">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">Featured templates</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">{t("Featured templates", locale)}</p>
               <h2 className="mt-4 text-balance text-4xl font-semibold md:text-6xl">
-                Premium starting points for modern service businesses.
+                {t("Premium starting points for modern service businesses.", locale)}
               </h2>
             </div>
             <ButtonLink href="/templates" variant="secondary">
-              View All Templates
+              {t("View All Templates", locale)}
             </ButtonLink>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {landingTemplates.map((template, index) => (
+            {localizedTemplates.map((template, index) => (
               <article key={template.name} className="overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
                 <div className="mockup-grid border-b border-border bg-gradient-to-br from-beige to-background p-5">
                   <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
@@ -196,10 +199,10 @@ export default function HomePage() {
                   <p className="mt-3 min-h-20 leading-7 text-taupe">{template.description}</p>
                   <div className="mt-6 grid gap-3 sm:grid-cols-2">
                     <ButtonLink href={`/templates#template-${index + 1}`} variant="ghost" className="w-full">
-                      Preview
+                      {t("Preview", locale)}
                     </ButtonLink>
                     <ButtonLink href="/templates" className="w-full">
-                      Use Template
+                      {t("Use Template", locale)}
                     </ButtonLink>
                   </div>
                 </div>
@@ -212,19 +215,19 @@ export default function HomePage() {
       <section className="bg-foreground py-16 text-background md:py-24">
         <div className="container-shell">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">Comparison</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">{t("Comparison", locale)}</p>
             <h2 className="mt-4 text-balance text-4xl font-semibold md:text-6xl">
-              A faster path than starting from zero.
+              {t("A faster path than starting from zero.", locale)}
             </h2>
           </div>
           <div className="mt-12 overflow-hidden rounded-2xl border border-[#3a352c]">
             <div className="grid bg-[#151411] text-sm font-semibold text-gold md:grid-cols-4">
-              <div className="p-4">Focus</div>
+              <div className="p-4">{t("Focus", locale)}</div>
               <div className="p-4">Uxpress</div>
-              <div className="p-4">Hiring an Agency</div>
-              <div className="p-4">DIY Website Builders</div>
+              <div className="p-4">{t("Hiring an Agency", locale)}</div>
+              <div className="p-4">{t("DIY Website Builders", locale)}</div>
             </div>
-            {comparison.map((row) => (
+            {localizedComparison.map((row) => (
               <div key={row.factor} className="grid border-t border-[#3a352c] text-sm leading-6 md:grid-cols-4">
                 <div className="bg-[#151411] p-4 font-semibold">{row.factor}</div>
                 <div className="p-4 text-[#efe7d9]">{row.uxpress}</div>
@@ -239,13 +242,13 @@ export default function HomePage() {
       <section className="bg-sand py-16 md:py-24">
         <div className="container-shell">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">Who it is for</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">{t("Who it is for", locale)}</p>
             <h2 className="mt-4 text-balance text-4xl font-semibold md:text-6xl">
-              Built for people who sell expertise, trust, and outcomes.
+              {t("Built for people who sell expertise, trust, and outcomes.", locale)}
             </h2>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {audiences.map((audience) => (
+            {localizedAudiences.map((audience) => (
               <article key={audience.title} className="rounded-2xl border border-border bg-background p-6">
                 <div className="grid h-12 w-12 place-items-center rounded-full bg-gold/25 text-sm font-bold text-foreground">
                   {audience.icon}
@@ -262,13 +265,13 @@ export default function HomePage() {
       <section className="bg-background py-16 md:py-24">
         <div className="container-shell">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">Testimonials</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">{t("Testimonials", locale)}</p>
             <h2 className="mt-4 text-balance text-4xl font-semibold md:text-6xl">
-              Launch confidence from people who move fast.
+              {t("Launch confidence from people who move fast.", locale)}
             </h2>
           </div>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {testimonials.map((testimonial) => (
+            {localizedTestimonials.map((testimonial) => (
               <figure key={testimonial.name} className="rounded-2xl border border-border bg-sand p-6">
                 <div className="flex items-center gap-4">
                   <div className="grid h-12 w-12 place-items-center rounded-full bg-foreground text-sm font-semibold text-background">
@@ -293,27 +296,27 @@ export default function HomePage() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-taupe">FAQ</p>
             <h2 className="mt-4 text-balance text-4xl font-semibold md:text-6xl">
-              Questions before you launch?
+              {t("Questions before you launch?", locale)}
             </h2>
             <p className="mt-5 text-lg leading-8 text-taupe">
-              The essentials on customization, domains, launch speed, and mobile readiness.
+              {t("The essentials on customization, domains, launch speed, and mobile readiness.", locale)}
             </p>
           </div>
-          <FAQAccordion items={landingFaqs} />
+          <FAQAccordion items={localizedFaqs} />
         </div>
       </section>
 
       <section className="bg-[linear-gradient(135deg,#0b0b0a_0%,#24211c_60%,#3a321f_100%)] py-16 text-center text-background md:py-24">
         <div className="container-shell">
           <h2 className="mx-auto max-w-4xl text-balance text-5xl font-semibold leading-none md:text-7xl">
-            Stop Delaying Your Online Presence.
+            {t("Stop Delaying Your Online Presence.", locale)}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#efe7d9]">
-            Choose a template today and launch a professional website faster than ever.
+            {t("Choose a template today and launch a professional website faster than ever.", locale)}
           </p>
           <div className="mt-8">
             <ButtonLink href="/templates" variant="gold">
-              Get Started
+              {t("Get Started", locale)}
             </ButtonLink>
           </div>
         </div>

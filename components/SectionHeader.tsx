@@ -1,3 +1,8 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { t } from "@/lib/i18n";
+
 type SectionHeaderProps = {
   eyebrow?: string;
   title: string;
@@ -13,6 +18,8 @@ export function SectionHeader({
   align = "left",
   light = false
 }: SectionHeaderProps) {
+  const { locale } = useLanguage();
+
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       {eyebrow ? (
@@ -21,7 +28,7 @@ export function SectionHeader({
             light ? "text-gold" : "text-taupe"
           }`}
         >
-          {eyebrow}
+          {t(eyebrow, locale)}
         </p>
       ) : null}
       <h2
@@ -29,7 +36,7 @@ export function SectionHeader({
           light ? "text-background" : "text-foreground"
         }`}
       >
-        {title}
+        {t(title, locale)}
       </h2>
       {body ? (
         <p
@@ -37,7 +44,7 @@ export function SectionHeader({
             light ? "text-[#efe7d9]" : "text-taupe"
           }`}
         >
-          {body}
+          {t(body, locale)}
         </p>
       ) : null}
     </div>

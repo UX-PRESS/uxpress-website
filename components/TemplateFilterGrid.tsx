@@ -1,13 +1,16 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 import { TemplateCard } from "@/components/TemplateCard";
 import type { Template } from "@/lib/templates";
+import { t } from "@/lib/i18n";
 
 const filters = ["All", "Coaches", "Consultants", "Personal Brands"] as const;
 
 export function TemplateFilterGrid({ templates }: { templates: Template[] }) {
   const [active, setActive] = useState<(typeof filters)[number]>("All");
+  const { locale } = useLanguage();
 
   const visibleTemplates = useMemo(() => {
     if (active === "All") {
@@ -31,7 +34,7 @@ export function TemplateFilterGrid({ templates }: { templates: Template[] }) {
                 : "border-border bg-background text-foreground hover:bg-sand"
             }`}
           >
-            {filter}
+            {t(filter, locale)}
           </button>
         ))}
       </div>

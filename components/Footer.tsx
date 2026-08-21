@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
+import { t } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
 const links = [
@@ -73,7 +74,7 @@ export function Footer() {
               {isPortuguese ? "Política de privacidade" : "Privacy Policy"}
             </Link>
           </div>
-          <p className="mt-6 text-xs text-[#a99f90]">© {new Date().getFullYear()} Uxpress. All rights reserved.</p>
+          <p className="mt-6 text-xs text-[#a99f90]">© {new Date().getFullYear()} Uxpress. {t("All rights reserved.", locale)}</p>
         </div>
       </div>
     </footer>

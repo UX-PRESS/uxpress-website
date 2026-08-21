@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
+import { t } from "@/lib/i18n";
 
 type StartFormProps = {
   selectedTemplate: string;
@@ -14,6 +16,7 @@ const businessTypes = ["Coach", "Consultant", "Mentor", "Freelancer", "Agency", 
 export function StartForm({ selectedTemplate }: StartFormProps) {
   const router = useRouter();
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const { locale } = useLanguage();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -62,7 +65,7 @@ export function StartForm({ selectedTemplate }: StartFormProps) {
     >
       <div className="grid gap-5 md:grid-cols-2">
         <label className="grid gap-2 text-sm font-semibold">
-          Full name
+          {t("Full name", locale)}
           <input
             name="fullName"
             required
@@ -71,7 +74,7 @@ export function StartForm({ selectedTemplate }: StartFormProps) {
           />
         </label>
         <label className="grid gap-2 text-sm font-semibold">
-          Email
+          {t("Email", locale)}
           <input
             name="email"
             type="email"
@@ -84,7 +87,7 @@ export function StartForm({ selectedTemplate }: StartFormProps) {
 
       <div className="grid gap-5 md:grid-cols-2">
         <label className="grid gap-2 text-sm font-semibold">
-          Business name
+          {t("Business name", locale)}
           <input
             name="businessName"
             required
@@ -93,29 +96,29 @@ export function StartForm({ selectedTemplate }: StartFormProps) {
           />
         </label>
         <label className="grid gap-2 text-sm font-semibold">
-          Business type
+          {t("Business type", locale)}
           <select name="businessType" className="min-h-12 rounded-xl border border-border bg-white px-4 text-base font-normal">
             {businessTypes.map((type) => (
-              <option key={type}>{type}</option>
+              <option key={type} value={type}>{t(type, locale)}</option>
             ))}
           </select>
         </label>
       </div>
 
       <label className="grid gap-2 text-sm font-semibold">
-        Website goal
+        {t("Website goal", locale)}
         <textarea
           name="websiteGoal"
           required
           rows={4}
           className="rounded-xl border border-border bg-white px-4 py-3 text-base font-normal"
-          placeholder="Example: book more discovery calls, sell a consulting package, launch a personal brand site..."
+          placeholder={t("Example: book more discovery calls, sell a consulting package, launch a personal brand site...", locale)}
         />
       </label>
 
       <div className="grid gap-5 md:grid-cols-2">
         <label className="grid gap-2 text-sm font-semibold">
-          WhatsApp
+          {t("WhatsApp", locale)}
           <input
             name="whatsapp"
             className="min-h-12 rounded-xl border border-border bg-white px-4 text-base font-normal"
@@ -123,7 +126,7 @@ export function StartForm({ selectedTemplate }: StartFormProps) {
           />
         </label>
         <label className="grid gap-2 text-sm font-semibold">
-          Instagram
+          {t("Instagram", locale)}
           <input
             name="instagram"
             className="min-h-12 rounded-xl border border-border bg-white px-4 text-base font-normal"
@@ -133,7 +136,7 @@ export function StartForm({ selectedTemplate }: StartFormProps) {
       </div>
 
       <label className="grid gap-2 text-sm font-semibold">
-        Selected template
+        {t("Selected template", locale)}
         <input
           name="selectedTemplate"
           readOnly
@@ -150,22 +153,22 @@ export function StartForm({ selectedTemplate }: StartFormProps) {
         {submitState === "loading" ? (
           <>
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-background/35 border-t-background" />
-            Submitting...
+            {t("Submitting...", locale)}
           </>
         ) : (
-          "Submit Launch Request"
+          t("Submit Launch Request", locale)
         )}
       </button>
 
       {submitState === "success" ? (
         <div role="status" className="rounded-2xl border border-gold/30 bg-gold/20 px-4 py-3 text-sm font-semibold text-charcoal">
-          Lead saved. Redirecting to next steps...
+          {t("Lead saved. Redirecting to next steps...", locale)}
         </div>
       ) : null}
 
       {submitState === "error" ? (
         <div role="alert" className="rounded-2xl border border-[#9f3a32]/20 bg-[#9f3a32]/10 px-4 py-3 text-sm font-semibold text-[#9f3a32]">
-          Something went wrong. Please try again.
+          {t("Something went wrong. Please try again.", locale)}
         </div>
       ) : null}
     </form>
