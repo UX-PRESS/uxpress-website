@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import { Navigation } from "@/components/Navigation";
 import "./globals.css";
 
@@ -47,9 +48,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        <Navigation />
-        <main id="main">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Navigation />
+          <main id="main">{children}</main>
+          <Footer />
+        </LanguageProvider>
         <script
           dangerouslySetInnerHTML={{
             __html:

@@ -8,6 +8,7 @@ Welcome to the Uxpress documentation hub, covering a marketplace for premium web
 - [Portfolio website objective](./PORTFOLIO_OBJECTIVE.md) - objective, primary conversion, metrics, and non-goals.
 - [Local development](./LOCAL_DEVELOPMENT.md) - how to install dependencies, run, and validate the project.
 - [Content guide](./CONTENT_GUIDE.md) - where to edit homepage content and add templates.
+- The interface detects Portuguese browser preferences and includes an English/Portuguese selector in the shared navigation.
 
 ## Product and operations
 

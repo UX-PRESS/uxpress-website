@@ -1,11 +1,14 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/components/LanguageProvider";
 import { site } from "@/lib/site";
 
 const links = [
-  { href: "/templates", label: "Templates" },
-  { href: "/installation-service", label: "Installation" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" }
+  { href: "/templates", en: "Templates", pt: "Templates" },
+  { href: "/installation-service", en: "Installation", pt: "Instalação" },
+  { href: "/faq", en: "FAQ", pt: "FAQ" },
+  { href: "/contact", en: "Contact", pt: "Contato" }
 ];
 
 const socialLinks = [
@@ -15,6 +18,9 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { locale } = useLanguage();
+  const isPortuguese = locale === "pt";
+
   return (
     <footer className="border-t border-border bg-foreground text-background">
       <div className="container-shell grid gap-10 py-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
@@ -23,15 +29,17 @@ export function Footer() {
             Uxpress
           </Link>
           <p className="mt-4 max-w-md text-sm leading-7 text-[#d8d0c4]">
-            Premium website kits for coaches, consultants, mentors, and service professionals who want to launch faster.
+            {isPortuguese
+              ? "Kits premium para coaches, consultores, mentores e profissionais de serviços que querem lançar mais rápido."
+              : "Premium website kits for coaches, consultants, mentors, and service professionals who want to launch faster."}
           </p>
         </div>
         <div>
-          <p className="mb-4 text-sm font-semibold text-gold">Explore</p>
+          <p className="mb-4 text-sm font-semibold text-gold">{isPortuguese ? "Explore" : "Explore"}</p>
           <div className="grid gap-3">
             {links.map((link) => (
               <Link key={link.href} href={link.href} className="text-sm text-[#d8d0c4] hover:text-background">
-                {link.label}
+                {isPortuguese ? link.pt : link.en}
               </Link>
             ))}
           </div>
@@ -53,16 +61,16 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <p className="mb-4 text-sm font-semibold text-gold">Support</p>
+          <p className="mb-4 text-sm font-semibold text-gold">{isPortuguese ? "Suporte" : "Support"}</p>
           <a className="text-sm text-[#d8d0c4] hover:text-background" href={`mailto:${site.supportEmail}`}>
             {site.supportEmail}
           </a>
           <div className="mt-5 flex flex-wrap gap-4 text-sm">
             <Link href="/terms" className="text-[#d8d0c4] hover:text-background">
-              Terms
+              {isPortuguese ? "Termos" : "Terms"}
             </Link>
             <Link href="/privacy" className="text-[#d8d0c4] hover:text-background">
-              Privacy Policy
+              {isPortuguese ? "Política de privacidade" : "Privacy Policy"}
             </Link>
           </div>
           <p className="mt-6 text-xs text-[#a99f90]">© {new Date().getFullYear()} Uxpress. All rights reserved.</p>
