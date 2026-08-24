@@ -38,14 +38,11 @@ Secondary actions support the primary conversion without competing with it:
 
 ## Target audience
 
-The website is designed for people who sell expertise, services, programs, or outcomes, including:
+The website is designed for three broad audience segments:
 
-- Coaches
-- Consultants
-- Mentors
-- Freelancers
-- Agencies
-- Other service businesses
+- **Small to Medium Businesses (SMBs)** - They need functional, professional, and good-looking websites that do not break the bank.
+- **Creative Professionals (Artists, Influencers, Freelancers)** - They want personality-driven sites that showcase their brand identity.
+- **Anyone Sick of Bad Websites** - If they have ever screamed at a confusing website, they are our people.
 
 ## Core visitor promise
 
